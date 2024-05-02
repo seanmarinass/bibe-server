@@ -5,9 +5,7 @@ import { SignUpUserApiDto } from '../controller/dto/api.dto';
 @Injectable()
 export class UserService {
   private logger = new Logger('User Service');
-  constructor(private readonly prisma: PrismaService) {
-    this.logger.debug(prisma);
-  }
+  constructor(private readonly prisma: PrismaService) {}
 
   async createUser(userData: SignUpUserApiDto): Promise<string> {
     try {

@@ -8,6 +8,7 @@ const url = `http://localhost:${port}`;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api');
   const logger = new Logger('Main');
 
   const config = new DocumentBuilder()

@@ -9,13 +9,13 @@ datasource db {
 
 model User {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  avatar       String
-  bibeIds      String[]
-  email        String
+  email        String   @unique
+  avatarUrl    String
   firstName    String
+  lastName     String
+  password     String?
+  displayName  String
+  bibeIds      String[]
   followerIds  String[]
   followingIds String[]
-  lastName     String
-  password     String
-  username     String
 }

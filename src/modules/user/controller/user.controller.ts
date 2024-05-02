@@ -20,9 +20,9 @@ export class UserController {
   @Post('signup')
   @ApiBody({ type: SignUpUserApiDto })
   @HttpCode(HttpStatus.CREATED)
-  async signUpUser(@Body() userData: SignUpUserApiDto): Promise<string> {
+  async signUp(@Body() userData: SignUpUserApiDto): Promise<string> {
     try {
-      this.logger.log(`signUpUser`);
+      this.logger.log(`Signing up...`);
       return await this.userService.createUser(userData);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
