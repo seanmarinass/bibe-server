@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Profile, Strategy } from 'passport-google-oauth20';
 import { AuthService } from '../services/auth.service';
@@ -15,8 +15,11 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     });
   }
 
+  private logger = new Logger('Google Strategy');
+
   async validate(accessToken: string, refreshToken: string, profile: Profile) {
     console.log(JSON.stringify(profile, null, 2));
+
     const data: ValidateUserDto = {
       avatar: profile.photos[0].value,
       email: profile.emails[0].value,
@@ -25,7 +28,10 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       displayName: profile.displayName,
     };
 
+    this.logger.debug('Validating user');
     const user = await this.authService.validateUser(data);
-    return user;
+    this.logger.debug(`User data: ${JSON.stringify(user, null, 2)}`);
+
+    return user || null;
   }
 }

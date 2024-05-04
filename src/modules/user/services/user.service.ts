@@ -12,8 +12,8 @@ export class UserService {
       this.logger.log(`Creating user...`);
       const createUser = await this.prisma.user.create({
         data: {
-          avatar: userData.avatar,
-          username: userData.username,
+          avatarUrl: userData.avatarUrl,
+          displayName: userData.displayName,
           password: userData.password,
           email: userData.email,
           firstName: userData.firstName,
